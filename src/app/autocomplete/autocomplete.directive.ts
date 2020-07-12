@@ -24,7 +24,7 @@ import { TemplatePortal } from '@angular/cdk/portal';
 })
 export class AutocompleteDirective implements OnInit, OnDestroy {
   @Input() appAutocomplete: AutocompleteComponent;
-  private overlayRef: OverlayRef;
+  private overlayRef: OverlayRef | null;
   private unsubscribe$: Subject<void>;
 
   constructor(
@@ -52,7 +52,7 @@ export class AutocompleteDirective implements OnInit, OnDestroy {
 
         this.appAutocomplete
           .optionsClick()
-          .pipe(takeUntil(this.overlayRef.detachments()))
+          .pipe(takeUntil((this.overlayRef as any).detachments()))
           .subscribe((value: string) => {
             this.control?.setValue(value);
             this.close();
@@ -65,6 +65,10 @@ export class AutocompleteDirective implements OnInit, OnDestroy {
   }
 
   openDropdown(): void {
+    if (this.overlay) {
+      this.close();
+    }
+
     this.overlayRef = this.overlay.create({
       width: this.origin.offsetWidth,
       maxHeight: 40 * 3,
@@ -85,8 +89,8 @@ export class AutocompleteDirective implements OnInit, OnDestroy {
   }
 
   private close(): void {
-    this.overlayRef.detach();
-    (this.overlayRef as any) = null;
+    this.overlayRef?.detach();
+    this.overlayRef = null;
   }
 
   private getOverlayPosition(): FlexibleConnectedPositionStrategy {
