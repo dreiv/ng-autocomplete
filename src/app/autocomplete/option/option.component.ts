@@ -1,11 +1,18 @@
-import { Component, OnInit, ElementRef, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  Input,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { Observable, fromEvent } from 'rxjs';
 import { mapTo } from 'rxjs/operators';
 
 @Component({
   selector: 'app-option',
   templateUrl: './option.component.html',
-  styleUrls: ['./option.component.scss']
+  styleUrls: ['./option.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OptionComponent implements OnInit {
   @Input() value: string;

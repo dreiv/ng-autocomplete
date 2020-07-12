@@ -6,14 +6,16 @@ import { AutocompleteComponent } from './autocomplete.component';
 import { AutocompleteContentDirective } from './autocomplete-content.directive';
 import { AutocompleteDirective } from './autocomplete.directive';
 
+const publicApi = [
+  AutocompleteComponent,
+  AutocompleteDirective,
+  AutocompleteContentDirective,
+  OptionComponent
+];
+
 @NgModule({
-  declarations: [
-    OptionComponent,
-    AutocompleteComponent,
-    AutocompleteContentDirective,
-    AutocompleteDirective
-  ],
+  declarations: [publicApi],
   imports: [CommonModule],
-  exports: [AutocompleteComponent]
+  exports: [publicApi]
 })
 export class AutocompleteModule {}

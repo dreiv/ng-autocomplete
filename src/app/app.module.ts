@@ -6,9 +6,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
 
 import { AppComponent } from './app.component';
 import { AutocompleteModule } from './autocomplete/autocomplete.module';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FilterPipe],
   imports: [
     BrowserModule,
     ReactiveFormsModule,

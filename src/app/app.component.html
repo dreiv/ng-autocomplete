@@ -1,1 +1,24 @@
-<h1>hello world!</h1>
+<div class="control">
+  <input
+    class="input is-medium"
+    placeholder="Search..."
+    [formControl]="control"
+    [appAutocomplete]="autocomplete"
+  />
+</div>
+
+<p>{{ control.value }}</p>
+
+<app-autocomplete #autocomplete="appAutocomplete">
+  <ng-template appAutocompleteContent>
+    <ng-container *ngIf="options | filter: control.value as result">
+      <app-option *ngFor="let option of result" [value]="option.label">
+        {{ option.label }}
+      </app-option>
+
+      <app-option class="no-result" *ngIf="!result.length"
+        >No result...</app-option
+      >
+    </ng-container>
+  </ng-template>
+</app-autocomplete>
