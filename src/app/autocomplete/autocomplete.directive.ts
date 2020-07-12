@@ -49,14 +49,14 @@ export class AutocompleteDirective implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
         this.openDropdown();
-      });
 
-    this.appAutocomplete
-      .optionsClick()
-      .pipe(takeUntil(this.overlayRef.detachments()))
-      .subscribe((value: string) => {
-        this.control?.setValue(value);
-        this.close();
+        this.appAutocomplete
+          .optionsClick()
+          .pipe(takeUntil(this.overlayRef.detachments()))
+          .subscribe((value: string) => {
+            this.control?.setValue(value);
+            this.close();
+          });
       });
   }
 
