@@ -83,9 +83,9 @@ export class AutocompleteDirective implements OnInit, OnDestroy {
     );
     this.overlayRef.attach(template);
 
-    overlayClickOutside(this.overlayRef, this.origin).subscribe(() =>
-      this.close()
-    );
+    overlayClickOutside(this.overlayRef, this.origin)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.close());
   }
 
   private close(): void {
